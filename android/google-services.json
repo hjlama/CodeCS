@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1057878578827",
+    "firebase_url": "https://codecs-ah921.firebaseio.com",
+    "project_id": "codecs-ah921",
+    "storage_bucket": "codecs-ah921.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057878578827:android:0869148203f82657",
+        "android_client_info": {
+          "package_name": "hjlam.css"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057878578827-uvslu8jt99s860pcrkgdvdll5ap6875d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzp36D-q6Vw5PzW6H4YXOlSg5F0AQDtmI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
         title: 'CodeCS',
-        home: Login();
-//        HomePage());
+//        home: Login();
+        home:HomePage());
   }
 }
