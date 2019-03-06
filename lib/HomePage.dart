@@ -4,11 +4,14 @@ import 'package:ccs/Report.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ccs/Settings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-  final String title;
+//  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.user}) : super(key: key);
+  final FirebaseUser user;
 
   @override
   _HomePageState createState() => _HomePageState();

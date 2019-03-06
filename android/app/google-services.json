@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1057878578827:android:0869148203f82657",
+        "mobilesdk_app_id": "1:1057878578827:android:e57228f6160c230d",
         "android_client_info": {
-          "package_name": "hjlam.css"
+          "package_name": "hjlam.ccs"
         }
       },
       "oauth_client": [
