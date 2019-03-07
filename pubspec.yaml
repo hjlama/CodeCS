@@ -68,6 +68,7 @@ flutter:
   - assets/linux.png
   - assets/python.png
   - assets/appicon.png
+  - assets/logo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

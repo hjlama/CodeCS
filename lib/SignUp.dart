@@ -40,27 +40,7 @@ class _SignUpState extends State<SignUp> {
                         },
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 170.0),
-                      decoration: new BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),),
-                      child: MaterialButton(
-                        color: Colors.cyan,
-                          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 42.0),
-                            child: Text(
-                              "LOGIN",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25.0,
-                                  fontFamily: "WorkSansBold"),
-                            ),
-                          ),
-                          onPressed: () =>
-                              showInSnackBar("Login button pressed")),
-                    ),
+
 
                   ],
                 ),
