@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'CheatSheetPage.dart';
 import 'ProgLang.dart';
 
@@ -27,7 +26,10 @@ class _HomeCardGridState extends State<HomeCardGrid> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Home',style: TextStyle(fontSize: 25),),
+        title: Text(
+          'Home',
+          style: TextStyle(fontSize: 25),
+        ),
         centerTitle: true,
       ),
 
@@ -92,7 +94,7 @@ List<Widget> createProgLangCardItem(
             Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => CheatSheetPage(progLang: proglang)),
+                  builder: (context) => CheatSheetPage(proglang: proglang,)),
             );
           },
           child: new Card(
@@ -116,9 +118,9 @@ List<Widget> createProgLangCardItem(
 
 List<ProgLang> getProgLang() {
   return [
-    ProgLang('Java', 'assets/java.png', 'assets/java.cs.jpg'),
-    ProgLang('JavaScript', 'assets/js.png', 'assets/java.cs.jpg'),
+    ProgLang('Java', 'assets/java.png', '/Users/adriehui/ccs/assets/cs-java.jpg'),
+    ProgLang('JavaScript', 'assets/js.png', 'assets/Java-Cheat-Sheet.pdf'),
     ProgLang('Linux', 'assets/linux.png', 'assets/java.cs.jpg'),
-    ProgLang('Python', 'assets/python.png', 'assets/java.cs.jpg')
+    ProgLang('Python', 'assets/python.png', 'assets/cs-python.pdf')
   ];
 }
