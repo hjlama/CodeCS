@@ -79,7 +79,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                       ),
                       new ConstrainedBox(
                         constraints: const BoxConstraints.expand(),
-                        child: Login(),
+                        child: SignUp(),
                       ),
                     ],
                   ),

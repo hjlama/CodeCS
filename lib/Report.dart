@@ -16,8 +16,14 @@ class _ReportState extends State<Report> {
       body: new Container(
           padding: const EdgeInsets.all(10.0),
           child: new Column(
+            //TODO create select roll
             children: <Widget>[new TextField(), new TextFormField()],
           )),
+      //TODO create a text field form
+
+      //TODO create a submit button
+
+      //TODO send report form to Firebase
     );
   }
 }

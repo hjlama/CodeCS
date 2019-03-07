@@ -29,16 +29,16 @@ class CheatSheetPage extends StatelessWidget {
             ),
           ],
         ),
-        path:proglang.cs);
+        path: proglang.cs);
   }
 }
 
-class CheatSheet {
-  String name;
-  String img;
-
-  CheatSheet({this.name, this.img});
-}
+//class CheatSheet {
+//  String name;
+//  String img;
+//
+//  CheatSheet({this.name, this.img});
+//}
 
 //class ProgLang {
 //  final String name;
