@@ -1,4 +1,6 @@
+import 'package:ccs/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'ProgLang.dart';
 
 /*
@@ -30,7 +32,15 @@ class _HomeCardGridState extends State<HomeCardGrid> {
           style: TextStyle(fontSize: 25),
         ),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help),
+            tooltip: 'Help',
+            onPressed: showHelpTab,
+          ),
+        ],
       ),
+//
 
       // grid made with local list
       body: CustomScrollView(
@@ -76,6 +86,36 @@ class _HomeCardGridState extends State<HomeCardGrid> {
 //          }),
     );
   }
+}
+
+void showHelpTab() async {
+  new SimpleDialog(
+    title: Text('Home'),
+    children: <Widget>[
+      new Container(
+        child: Text(
+            'This is the home page of the app which displays all the programming languages'),
+      ),
+      new MaterialButton(
+          color: Colors.cyan,
+          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+            child: Text(
+              "Okay",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25.0,
+                  fontFamily: "WorkSansBold"),
+            ),
+          ),
+          onPressed: () {
+            //TODO back to home page
+            Navigator.pop(context);
+          })
+    ],
+  );
 }
 
 //// create a card layout for the prog lang in the home page
