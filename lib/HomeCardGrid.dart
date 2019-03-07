@@ -100,7 +100,12 @@ List<Widget> createProgLangCardItem(
             );
           },
           child: new Card(
+            elevation: 2.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
             child: Image.asset(proglang.image),
+
           ),
         ),
       );
