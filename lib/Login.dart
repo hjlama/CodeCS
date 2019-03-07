@@ -16,7 +16,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Login',style: TextStyle(fontSize: 26),),
+        centerTitle: true,
       ),
       body: Form(
         key: _formKey,
