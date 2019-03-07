@@ -58,24 +58,6 @@ class _HomePageState extends State<HomePage>
           children: _tabList,
         ),
 
-//      bottomNavigationBar: BottomNavigationBar(
-//        currentIndex: _currentIndex,
-//        onTap: (currentIndex) {
-//          setState(() {
-//            _currentIndex = currentIndex;
-//          });
-//
-//          _tabController.animateTo(_currentIndex);
-//        },
-//        items: [
-//          BottomNavigationBarItem(title: Text('Home'), icon: Icon(Icons.home)),
-//          BottomNavigationBarItem(
-//              title: Text('Report'), icon: Icon(Icons.error)),
-//          BottomNavigationBarItem(
-//              title: Text("Settings"), icon: Icon(Icons.settings))
-//        ],
-//      ),
-
         //bottom_navy_bar
         bottomNavigationBar: BottomNavyBar(
           onItemSelected: (index) => setState(() {

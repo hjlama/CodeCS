@@ -36,7 +36,7 @@ class _HomeCardGridState extends State<HomeCardGrid> {
           IconButton(
             icon: Icon(Icons.help),
             tooltip: 'Help',
-            onPressed: showHelpTab,
+            onPressed: showDialog,
           ),
         ],
       ),
@@ -112,7 +112,7 @@ void showHelpTab() async {
           ),
           onPressed: () {
             //TODO back to home page
-            Navigator.pop(context);
+//            Navigator.pop(_);
           })
     ],
   );

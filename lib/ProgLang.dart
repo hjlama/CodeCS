@@ -13,10 +13,14 @@ class ProgLang {
 
 List<ProgLang> getProgLang() {
   return [
-    ProgLang('Java', 'assets/java.png', '/Users/adriehui/ccs/assets/cs-java.jpg'),
-    ProgLang('JavaScript', 'assets/js.png', 'assets/Java-Cheat-Sheet.pdf'),
-    ProgLang('Linux', 'assets/linux.png', 'assets/java.cs.jpg'),
-    ProgLang('Python', 'assets/python.png', 'assets/cs-python.pdf')
+    ProgLang('Java', 'assets/java/java.png', '/Users/adriehui/ccs/assets/java/cs-java.jpg'),
+    ProgLang('JavaScript', 'assets/js.png', '/Users/adriehui/ccs/assets/javascript/cs-javascript.pdf'),
+    ProgLang('Linux', 'assets/linux.png', '/Users/adriehui/ccs/assets/linux/cs-linux.pdf'),
+    ProgLang('Python', 'assets/python.png', '/Users/adriehui/ccs/assets/python/cs-python.pdf'),
+    ProgLang('CSS', 'assets/css/css.png', '/Users/adriehui/ccs/assets/css/cs-css.pdf'),
+    ProgLang('HTML', 'assets/html/html.png', '/Users/adriehui/ccs/assets/html/cs-html.pdf'),
+    ProgLang('C#', 'assets/c/c.png', '/Users/adriehui/ccs/assets/c/cs-c.pdf'),
+    ProgLang('MySQL', 'assets/mysql.png', '/Users/adriehui/ccs/assets/mysql/cs-mysql.pdf'),
   ];
 }
 
@@ -35,20 +39,22 @@ List<Widget> createProgLangCardItem(
             Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (context) => CheatSheetPage(proglang: proglang,)),
+                  builder: (context) => CheatSheetPage(proglang: proglang,name: proglang.name)),
             );
           },
           child: new Card(
             margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
+                borderRadius: BorderRadius.circular(15.0)),
             elevation: 4.0,
             child: new Image(
               image: AssetImage(proglang.image),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
           ),
+
         ),
+
       );
 
       listElementWidgetList.add(listItem);
