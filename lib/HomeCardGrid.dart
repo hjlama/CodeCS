@@ -27,7 +27,7 @@ class _HomeCardGridState extends State<HomeCardGrid> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Home',style: TextStyle(fontSize: 25),),
         centerTitle: true,
       ),
 
@@ -87,10 +87,6 @@ List<Widget> createProgLangCardItem(
       ProgLang proglang = proglangs[i];
 
       var listItem = new GridTile(
-        footer: new GridTileBar(
-          backgroundColor: Colors.white70,
-          title: new Text(proglang.name),
-        ),
         child: new GestureDetector(
           onTap: () {
             Navigator.push(
@@ -100,12 +96,14 @@ List<Widget> createProgLangCardItem(
             );
           },
           child: new Card(
-            elevation: 2.0,
+            margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(10.0)),
+            elevation: 4.0,
+            child: new Image(
+              image: AssetImage(proglang.image),
+              fit: BoxFit.contain,
             ),
-            child: Image.asset(proglang.image),
-
           ),
         ),
       );
@@ -120,7 +118,7 @@ List<ProgLang> getProgLang() {
   return [
     ProgLang('Java', 'assets/java.png', 'assets/java.cs.jpg'),
     ProgLang('JavaScript', 'assets/js.png', 'assets/java.cs.jpg'),
-    ProgLang('Linux', 'assets/linux.png', 'assets/jaava.cs.jpg'),
-    ProgLang('Python', 'assets/python.png', 'assets/jaava.cs.jpg')
+    ProgLang('Linux', 'assets/linux.png', 'assets/java.cs.jpg'),
+    ProgLang('Python', 'assets/python.png', 'assets/java.cs.jpg')
   ];
 }
