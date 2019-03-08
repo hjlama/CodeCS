@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(title: 'CodeCS',
-//        home: Welcome());
-        home:HomePage());
+        home: Welcome());
+//        home:HomePage());
   }
 }

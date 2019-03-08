@@ -20,11 +20,13 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
           overscroll.disallowGlow();
         },
         child: SingleChildScrollView(
+          // Container for the background
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height >= 775.0
@@ -38,9 +40,13 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                   stops: [0.0, 1.0],
                   tileMode: TileMode.clamp),
             ),
+
             child: Column(
+
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
+
+
                 Padding(
                   //logo in the middle
                   padding: EdgeInsets.only(top: 75.0),
@@ -52,7 +58,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20.0),
+                  padding: EdgeInsets.only(top: 10.0),
                   child: _buildMenuBar(context),
                 ),
                 Expanded(
@@ -122,7 +128,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
               child: FlatButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: _onSignInButtonPress,
+                onPressed: _loginTapped,
                 child: Text(
                   "Login",
                   style: TextStyle(
@@ -132,12 +138,12 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
-            //Container(height: 33.0, width: 1.0, color: Colors.white),
+
             Expanded(
               child: FlatButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: _onSignUpButtonPress,
+                onPressed: _signupTapped,
                 child: Text(
                   "Signup",
                   style: TextStyle(
@@ -153,12 +159,12 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
     );
   }
 
-  void _onSignInButtonPress() {
+  void _loginTapped() {
     _pageController.animateToPage(0,
         duration: Duration(milliseconds: 500), curve: Curves.decelerate);
   }
 
-  void _onSignUpButtonPress() {
+  void _signupTapped() {
     _pageController?.animateToPage(1,
         duration: Duration(milliseconds: 500), curve: Curves.decelerate);
   }

@@ -1,4 +1,7 @@
+import 'package:ccs/Login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -6,12 +9,22 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String _email, _password;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 23),
-      child: Column(
+    return Form(
+      key: _formKey,
+//      EdgeInsets.only(top: 20.0),
+      child: new Column(
         children: <Widget>[
+          // invisible widget to create gap in between
+          new Opacity(
+              opacity: 0.0,
+              child: new Padding(
+                padding: const EdgeInsets.only(top: 20),
+              )),
           Stack(
             alignment: Alignment.topCenter,
             overflow: Overflow.visible,
@@ -23,33 +36,208 @@ class _SignUpState extends State<SignUp> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Container(
-                  width: 300,height: 360,child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(25, 20, 25, 20),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Name',
+                  width: 300.0,
+                  height: 245.0,
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input.isEmpty) {
+                              return 'Please type email';
+                            }
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                          onSaved: (input) => _email = input,
+                          decoration: InputDecoration(labelText: 'Email'),
                         ),
-                        onSaved: (String value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                        validator: (String value) {
-                          return value.contains('@') ? 'Do not use the @ char.' : null;
-                        },
+                      ),
+                      // grey line separating email and password container
+                      Container(
+                        width: 275.0,
+                        height: 1.0,
+                        color: Colors.grey[400],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input.isEmpty) {
+                              return 'Please type email';
+                            }
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                          onSaved: (input) => _password = input,
+                          decoration: InputDecoration(labelText: 'Password'),
+                          obscureText: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // LOGIN BUTTON
+              Container(
+                margin: EdgeInsets.only(top: 225.0),
+                decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.lightBlue,
+                      offset: Offset(1.0, 6.0),
+                      blurRadius: 20.0,
+                    ),
+                    BoxShadow(
+                      color: Colors.white30,
+                      offset: Offset(1.0, 6.0),
+                      blurRadius: 20.0,
+                    ),
+                  ],
+                  gradient: new LinearGradient(
+                      colors: [Colors.blue, Colors.lightBlue],
+                      begin: const FractionalOffset(0.2, 0.2),
+                      end: const FractionalOffset(1.0, 1.0),
+                      stops: [0.0, 1.0],
+                      tileMode: TileMode.clamp),
+                ),
+                child: MaterialButton(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.lightBlue,
+                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 42.0),
+                      child: Text(
+                        "LOGIN",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: "WorkSansBold"),
                       ),
                     ),
-
-
+                    onPressed: login),
+              ),
+              Padding(
+                // gap in between button n text
+                padding: EdgeInsets.only(top: 310.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // the middle bar
+                  children: <Widget>[
+                    // left bar
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: new LinearGradient(
+                            colors: [Colors.white, Colors.white10],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(1.0, 1.0),
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      // size of the bar
+                      width: 100.0, height: 1.0,
+                    ),
+                    // text
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                      child: Text(
+                        "Or login with ",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                            fontFamily: "WorkSansMedium"),
+                      ),
+                    ),
+                    // right bar
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: new LinearGradient(
+                            colors: [Colors.white, Colors.white10],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(1.0, 1.0),
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      width: 100.0,
+                      height: 1.0,
+                    ),
                   ],
                 ),
-                ),
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    //facebook widget
+                    padding: EdgeInsets.only(top: 350.0, right: 50.0),
+                    child: GestureDetector(
+                      onTap: facebook_firebase,
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: new Icon(
+                          MdiIcons.facebook,
+                          color: Colors.blue[800],
+                          size: 38,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // google
+                  Padding(
+                    //google widget
+                    padding: EdgeInsets.only(top: 350.0, left: 50.0),
+                    child: GestureDetector(
+                      onTap: google_firebase,
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: new Icon(
+                          MdiIcons.google,
+                          color: Colors.blue[800] ,
+                          size: 38,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
+
+// when tapping the login button
+  void login() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Login()));
+      } catch (e) {
+        print(e.message);
+      }
+    }
+  }
+}
+
+void facebook_firebase() {
+  //TODO facebook firebase login
+}
+
+void google_firebase() {
+  //TODO google firebase login
 }

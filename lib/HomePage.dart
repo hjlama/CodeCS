@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage>
 //      appBar: AppBar(
 //        title: Text(widget.title),
 //      ),
+    backgroundColor: Colors.white70,
         body: TabBarView(
           controller: _tabController,
           children: _tabList,
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage>
 
         //bottom_navy_bar
         bottomNavigationBar: BottomNavyBar(
+          backgroundColor: Colors.white,
           onItemSelected: (index) => setState(() {
                 _currentIndex = index;
                 _tabController.animateTo(_currentIndex);
