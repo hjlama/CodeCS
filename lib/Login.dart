@@ -37,11 +37,11 @@ class _LoginState extends State<Login> {
                 ),
                 child: Container(
                   width: 300.0,
-                  height: 245.0,
+                  height: 220.0,
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        padding: EdgeInsets.fromLTRB(30, 15.0, 30.0, 15.0),
                         child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
@@ -51,17 +51,25 @@ class _LoginState extends State<Login> {
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _email = input,
-                          decoration: InputDecoration(labelText: 'Email'),
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            border: InputBorder.none,
+                            icon: Icon(
+                              MdiIcons.email,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                          ),
                         ),
                       ),
                       // grey line separating email and password container
                       Container(
-                        width: 275.0,
+                        width: 200.0,
                         height: 1.0,
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        padding: EdgeInsets.fromLTRB(30, 15.0, 30.0, 20.0),
                         child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
@@ -71,7 +79,15 @@ class _LoginState extends State<Login> {
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _password = input,
-                          decoration: InputDecoration(labelText: 'Password'),
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: InputBorder.none,
+                            icon: Icon(
+                              MdiIcons.lock,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                          ),
                           obscureText: true,
                         ),
                       ),
@@ -81,7 +97,7 @@ class _LoginState extends State<Login> {
               ),
               // LOGIN BUTTON
               Container(
-                margin: EdgeInsets.only(top: 225.0),
+                margin: EdgeInsets.only(top: 200.0),
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   boxShadow: <BoxShadow>[
@@ -122,7 +138,7 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 // gap in between button n text
-                padding: EdgeInsets.only(top: 310.0),
+                padding: EdgeInsets.only(top: 290.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // the middle bar
@@ -184,7 +200,7 @@ class _LoginState extends State<Login> {
                         child: new Icon(
                           MdiIcons.facebook,
                           color: Colors.blue[800],
-                          size: 38,
+                          size: 40,
                         ),
                       ),
                     ),
@@ -203,8 +219,8 @@ class _LoginState extends State<Login> {
                         ),
                         child: new Icon(
                           MdiIcons.google,
-                          color: Colors.blue[800] ,
-                          size: 38,
+                          color: Colors.blue[800],
+                          size: 40,
                         ),
                       ),
                     ),
