@@ -1,4 +1,5 @@
 import 'package:ccs/Login_Signup/Login.dart';
+import 'package:ccs/Login_Signup/Welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -99,11 +100,21 @@ class _SignUpState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                         child: TextFormField(
-                          validator: (input) {
-                            if (input != _password) {
+                          validator: (retype) {
+                            if (retype == _password && retype != null) {
                               return 'Password does not match';
                             }
                           },
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                          decoration: InputDecoration(
+                            labelText: 'Re-enter password',
+                            border: InputBorder.none,
+                            icon: Icon(
+                              MdiIcons.lock,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                          ),
                           obscureText: true,
                         ),
                       ),
@@ -113,7 +124,7 @@ class _SignUpState extends State<SignUp> {
               ),
               // LOGIN BUTTON
               Container(
-                margin: EdgeInsets.only(top: 225.0),
+                margin: EdgeInsets.only(top: 300.0),
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   boxShadow: <BoxShadow>[
@@ -141,9 +152,9 @@ class _SignUpState extends State<SignUp> {
                     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 42.0),
+                          vertical: 15.0, horizontal: 40.0),
                       child: Text(
-                        "LOGIN",
+                        "SIGN UP",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,
@@ -167,7 +178,7 @@ class _SignUpState extends State<SignUp> {
         FirebaseUser user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
+            context, MaterialPageRoute(builder: (context) => Welcome()));
       } catch (e) {
         print(e.message);
       }

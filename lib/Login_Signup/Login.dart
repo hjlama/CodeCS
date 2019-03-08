@@ -37,23 +37,22 @@ class _LoginState extends State<Login> {
                 ),
                 child: Container(
                   width: 300.0,
-                  height: 220.0,
+                  height: 200.0,
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(20, 8.0, 20.0, 8.0),
+                        padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                         child: TextFormField(
-
                           validator: (input) {
                             if (input.isEmpty) {
-                              return 'Email does not exist in the system, please sign up';
+                              return 'Email does not exist in the system';
                             }
                           },
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _email = input,
                           decoration: InputDecoration(
-                            hintText: 'Email',
+                            labelText: 'Email',
                             border: InputBorder.none,
                             icon: Icon(
                               MdiIcons.email,
@@ -77,7 +76,6 @@ class _LoginState extends State<Login> {
                               return 'Wrong password';
                             }
                           },
-
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _password = input,
                           decoration: InputDecoration(
@@ -96,9 +94,10 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              // LOGIN BUTTON
+
+              //Login button Container
               Container(
-                margin: EdgeInsets.only(top: 200.0),
+                margin: EdgeInsets.only(top: 185.0),
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   boxShadow: <BoxShadow>[
@@ -126,7 +125,7 @@ class _LoginState extends State<Login> {
                     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 42.0),
+                          vertical: 15.0, horizontal: 50.0),
                       child: Text(
                         "LOGIN",
                         style: TextStyle(
@@ -209,7 +208,7 @@ class _LoginState extends State<Login> {
                   // google
                   Padding(
                     //google widget
-                    padding: EdgeInsets.only(top: 350.0, left: 50.0),
+                    padding: EdgeInsets.only(top: 350.0, left: 30.0),
                     child: GestureDetector(
                       onTap: google_firebase,
                       child: Container(
@@ -220,6 +219,26 @@ class _LoginState extends State<Login> {
                         ),
                         child: new Icon(
                           MdiIcons.google,
+                          color: Colors.blue[800],
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    //google widget
+                    padding: EdgeInsets.only(top: 350.0, left: 50.0),
+                    child: GestureDetector(
+                      onTap: google_firebase,
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: new Icon(
+                          MdiIcons.naturePeople,
                           color: Colors.blue[800],
                           size: 40,
                         ),
@@ -249,6 +268,7 @@ class _LoginState extends State<Login> {
       }
     }
   }
+
 }
 
 void facebook_firebase() {
