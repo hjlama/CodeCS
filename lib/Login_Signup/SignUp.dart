@@ -1,4 +1,4 @@
-import 'package:ccs/Login.dart';
+import 'package:ccs/Login_Signup/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -37,41 +37,73 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: Container(
                   width: 300.0,
-                  height: 245.0,
+                  height: 320.0,
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        padding: EdgeInsets.fromLTRB(30, 8.0, 30.0, 8.0),
                         child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
-                              return 'Please type email';
+                              return 'Please enter your email';
                             }
                           },
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _email = input,
-                          decoration: InputDecoration(labelText: 'Email'),
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            border: InputBorder.none,
+                            icon: Icon(
+                              MdiIcons.email,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                          ),
                         ),
                       ),
                       // grey line separating email and password container
                       Container(
-                        width: 275.0,
+                        width: 250.0,
                         height: 1.0,
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 25.0),
+                        padding: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                         child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
-                              return 'Please type email';
+                              return 'Please enter password';
                             }
                           },
-                          keyboardType: TextInputType.emailAddress,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _password = input,
-                          decoration: InputDecoration(labelText: 'Password'),
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: InputBorder.none,
+                            icon: Icon(
+                              MdiIcons.lock,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                          ),
+                          obscureText: true,
+                        ),
+                      ),
+                      Container(
+                        width: 250.0,
+                        height: 1.0,
+                        color: Colors.grey[400],
+                      ),
+                      // Password confirmation
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input != _password) {
+                              return 'Password does not match';
+                            }
+                          },
                           obscureText: true,
                         ),
                       ),
@@ -118,98 +150,7 @@ class _SignUpState extends State<SignUp> {
                             fontFamily: "WorkSansBold"),
                       ),
                     ),
-                    onPressed: login),
-              ),
-              Padding(
-                // gap in between button n text
-                padding: EdgeInsets.only(top: 310.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // the middle bar
-                  children: <Widget>[
-                    // left bar
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: new LinearGradient(
-                            colors: [Colors.white, Colors.white10],
-                            begin: const FractionalOffset(0.0, 0.0),
-                            end: const FractionalOffset(1.0, 1.0),
-                            stops: [0.0, 1.0],
-                            tileMode: TileMode.clamp),
-                      ),
-                      // size of the bar
-                      width: 100.0, height: 1.0,
-                    ),
-                    // text
-                    Padding(
-                      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                      child: Text(
-                        "Or login with ",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                            fontFamily: "WorkSansMedium"),
-                      ),
-                    ),
-                    // right bar
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: new LinearGradient(
-                            colors: [Colors.white, Colors.white10],
-                            begin: const FractionalOffset(0.0, 0.0),
-                            end: const FractionalOffset(1.0, 1.0),
-                            stops: [0.0, 1.0],
-                            tileMode: TileMode.clamp),
-                      ),
-                      width: 100.0,
-                      height: 1.0,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    //facebook widget
-                    padding: EdgeInsets.only(top: 350.0, right: 50.0),
-                    child: GestureDetector(
-                      onTap: facebook_firebase,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.facebook,
-                          color: Colors.blue[800],
-                          size: 38,
-                        ),
-                      ),
-                    ),
-                  ),
-                  // google
-                  Padding(
-                    //google widget
-                    padding: EdgeInsets.only(top: 350.0, left: 50.0),
-                    child: GestureDetector(
-                      onTap: google_firebase,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.google,
-                          color: Colors.blue[800] ,
-                          size: 38,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                    onPressed: signup),
               ),
             ],
           ),
@@ -219,14 +160,14 @@ class _SignUpState extends State<SignUp> {
   }
 
 // when tapping the login button
-  void login() async {
+  void signup() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
         FirebaseUser user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Login()));
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
       } catch (e) {
         print(e.message);
       }

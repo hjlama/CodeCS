@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'CheatSheetPage.dart';
+import 'package:ccs/HomePage/CheatSheetPage.dart';
 class ProgLang {
   final String name;
   final String image;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'Login.dart';
+import 'package:ccs/Login_Signup/Login.dart';
 import 'SignUp.dart';
 
 class Welcome extends StatefulWidget {

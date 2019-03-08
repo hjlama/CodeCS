@@ -1,8 +1,7 @@
-import 'package:ccs/HomeCardGrid.dart';
-import 'package:ccs/HomePage.dart';
+import 'package:ccs/HomePage/HomeCardGrid.dart';
 import 'package:ccs/Report.dart';
 import 'package:flutter/material.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:ccs/bottom_navy_bar_rewrite.dart';
 import 'package:ccs/Settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

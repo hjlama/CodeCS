@@ -1,6 +1,6 @@
+import 'package:ccs/HomePage/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'HomePage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class Login extends StatefulWidget {
@@ -41,11 +41,12 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30, 15.0, 30.0, 15.0),
+                        padding: EdgeInsets.fromLTRB(20, 8.0, 20.0, 8.0),
                         child: TextFormField(
+
                           validator: (input) {
                             if (input.isEmpty) {
-                              return 'Please type email';
+                              return 'Email does not exist in the system, please sign up';
                             }
                           },
                           keyboardType: TextInputType.emailAddress,
@@ -64,19 +65,19 @@ class _LoginState extends State<Login> {
                       ),
                       // grey line separating email and password container
                       Container(
-                        width: 200.0,
+                        width: 250.0,
                         height: 1.0,
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30, 15.0, 30.0, 20.0),
+                        padding: EdgeInsets.fromLTRB(20, 8.0, 20.0, 8.0),
                         child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
-                              return 'Please type email';
+                              return 'Wrong password';
                             }
                           },
-                          keyboardType: TextInputType.emailAddress,
+
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                           onSaved: (input) => _password = input,
                           decoration: InputDecoration(
