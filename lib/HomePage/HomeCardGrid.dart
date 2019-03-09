@@ -1,6 +1,6 @@
 import 'package:ccs/HomePage/HomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'ProgLang.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -14,6 +14,7 @@ class HomeCardGrid extends StatefulWidget {
 }
 
 class _HomeCardGridState extends State<HomeCardGrid> {
+//  final FirebaseUser _user = f;
   List<ProgLang> proglanglist = getProgLang();
 
   @override
@@ -57,7 +58,8 @@ class _HomeCardGridState extends State<HomeCardGrid> {
     );
   }
 
-  void signout() {
+  void signout() async {
+//    FirebaseUser user = await _
 
   }
 }

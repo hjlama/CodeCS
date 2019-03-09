@@ -147,7 +147,7 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 // gap in between button n text
-                padding: EdgeInsets.only(top: 290.0),
+                padding: EdgeInsets.only(top: 280.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // the middle bar
@@ -156,32 +156,32 @@ class _LoginState extends State<Login> {
                     Container(
                       decoration: BoxDecoration(
                         gradient: new LinearGradient(
-                            colors: [Colors.white, Colors.white10],
+                            colors: [Colors.black12, Colors.black87],
                             begin: const FractionalOffset(0.0, 0.0),
                             end: const FractionalOffset(1.0, 1.0),
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                       ),
                       // size of the bar
-                      width: 100.0,
+                      width: 90.0,
                       height: 1.0,
                     ),
-                    // text
+                    // Text
                     Padding(
                       padding: EdgeInsets.only(left: 15.0, right: 15.0),
                       child: Text(
-                        "Or login with ",
+                        "Or login with",
                         style: Theme.of(context)
                             .textTheme
                             .subtitle
-                            .copyWith(color: Colors.white),
+                            .copyWith(color: Colors.black87),
                       ),
                     ),
                     // right bar
                     Container(
                       decoration: BoxDecoration(
                         gradient: new LinearGradient(
-                            colors: [Colors.white, Colors.white10],
+                            colors: [Colors.black87, Colors.black12],
                             begin: const FractionalOffset(0.0, 0.0),
                             end: const FractionalOffset(1.0, 1.0),
                             stops: [0.0, 1.0],
@@ -325,9 +325,9 @@ _buttonDecor(IconData icon) {
 
 void wechat_login() {
   //TODO implementing wechat login
-  fluwx
-      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-      .then((data) {});
+//  fluwx
+//      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+//      .then((data) {});
 }
 
 void facebook_firebase() {
