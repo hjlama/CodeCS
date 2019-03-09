@@ -1,4 +1,5 @@
 import 'package:ccs/HomePage/HomePage.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -188,7 +189,7 @@ class _LoginState extends State<Login> {
                 children: <Widget>[
                   Padding(
                     //facebook widget
-                    padding: EdgeInsets.only(top: 350.0, right: 50.0),
+                    padding: EdgeInsets.only(top: 350.0, left: 10.0,right: 15.0),
                     child: GestureDetector(
                       onTap: facebook_firebase,
                       child: Container(
@@ -205,10 +206,31 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
+
+                  // wechat login
+                  Padding(
+                    //google widget
+                    padding: EdgeInsets.only(top: 350.0,right: 15.0,left: 10.0),
+                    child: GestureDetector(
+                      onTap: google_firebase,
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: new Icon(
+                          MdiIcons.wechat,
+                          color: Colors.blue[800],
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
                   // google
                   Padding(
                     //google widget
-                    padding: EdgeInsets.only(top: 350.0, left: 30.0),
+                    padding: EdgeInsets.only(top: 350.0,left: 10.0 ,right: 10.0),
                     child: GestureDetector(
                       onTap: google_firebase,
                       child: Container(
@@ -227,10 +249,10 @@ class _LoginState extends State<Login> {
                   ),
 
                   Padding(
-                    //google widget
-                    padding: EdgeInsets.only(top: 350.0, left: 50.0),
+                    //Anonymous login button
+                    padding: EdgeInsets.only(top: 350.0,left: 15.0 ),
                     child: GestureDetector(
-                      onTap: google_firebase,
+                      onTap: login_anon,
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
                         decoration: new BoxDecoration(
@@ -238,7 +260,7 @@ class _LoginState extends State<Login> {
                           color: Colors.white,
                         ),
                         child: new Icon(
-                          MdiIcons.naturePeople,
+                          MdiIcons.accountTie,
                           color: Colors.blue[800],
                           size: 40,
                         ),
@@ -269,7 +291,19 @@ class _LoginState extends State<Login> {
     }
   }
 
+
+  Future<FirebaseUser> login_anon() async {
+    try{
+      FirebaseUser user = await FirebaseAuth.instance.signInAnonymously();
+      print('Signed in ${user.uid}');
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => HomePage(user: user)));
+    }catch(e){
+      print(e.message);
+    }
+  }
 }
+
 
 void facebook_firebase() {
   //TODO facebook firebase login

@@ -100,9 +100,11 @@ class _SignUpState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                         child: TextFormField(
-                          validator: (retype) {
-                            if (retype == _password && retype != null) {
-                              return 'Password does not match';
+                          validator: (input){
+                            if(input != _password){
+                              return 'Password not match';
+                            }else{
+                              _password = input;
                             }
                           },
                           style: TextStyle(fontSize: 16, color: Colors.black54),
