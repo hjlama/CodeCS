@@ -33,7 +33,16 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold)
               .copyWith(color: Colors.white),
         ),
-        appBarTheme: AppBarTheme(color: Colors.lightBlue),
+        appBarTheme: AppBarTheme(
+          color: Colors.lightBlue,
+          textTheme: TextTheme(
+            title: TextStyle(
+                fontFamily: 'ProximaNova',
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
+          ),
+          iconTheme: IconThemeData(color: Colors.white, size: 15.0),
+        ),
         backgroundColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),

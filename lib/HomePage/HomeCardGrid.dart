@@ -2,6 +2,7 @@ import 'package:ccs/HomePage/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'ProgLang.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 /*
  * This class is a widget class that creates the homepage grid
@@ -15,14 +16,6 @@ class HomeCardGrid extends StatefulWidget {
 class _HomeCardGridState extends State<HomeCardGrid> {
   List<ProgLang> proglanglist = getProgLang();
 
-  // in app list
-//  List<ProgLang> proglanglist = [
-//    ProgLang(1, 'Java', 'assets/java.png'),
-//    ProgLang(2, 'JavaScript', 'assets/js.png'),
-//    ProgLang(3, 'Linux', 'assets/linux.png'),
-//    ProgLang(4, 'Python', 'assets/python.png')
-//  ];
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -34,9 +27,13 @@ class _HomeCardGridState extends State<HomeCardGrid> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.help),
+            icon: Icon(
+              MdiIcons.accountCircle,
+              size: 40.0,
+            ),
+            padding: const EdgeInsets.symmetric(),
             tooltip: 'Help',
-            onPressed: showDialog,
+            onPressed: signout,
           ),
         ],
       ),
@@ -57,34 +54,11 @@ class _HomeCardGridState extends State<HomeCardGrid> {
           ),
         ],
       ),
-
-      // app getting programming language from firebase
-      //      body: StreamBuilder(
-      //          stream: Firestore.instance.collection('proglang').snapshots(),
-      //          builder: (context, snapshot) {
-      //            if (!snapshot.hasData)
-      //              return new Container(
-      //                child: new Center(
-      //                  child: new CircularProgressIndicator(),
-      //                ),
-      //              );
-      //            List proglanglist = snapshot.data;
-      //            return new CustomScrollView(
-      //              primary: false,
-      //              slivers: <Widget>[
-      //                new SliverPadding(
-      //                  padding: const EdgeInsets.all(10.0),
-      //                  sliver: new SliverGrid.count(
-      //                    crossAxisCount: 2,
-      //                    mainAxisSpacing: 10.0,
-      //                    crossAxisSpacing: 10.0,
-      //                    children: createProgLangCardItem(proglanglist, context),
-      //                  ),
-      //                ),
-      //              ],
-      //            );
-      //          }),
     );
+  }
+
+  void signout() {
+
   }
 }
 
@@ -117,50 +91,3 @@ void showHelpTab() async {
     ],
   );
 }
-
-//// create a card layout for the prog lang in the home page
-//List<Widget> createProgLangCardItem(
-//    List<ProgLang> proglangs, BuildContext context) {
-//  List<Widget> listElementWidgetList = new List<Widget>();
-//  if (proglangs != null) {
-//    var lengthOfList = proglangs.length;
-//    for (int i = 0; i < lengthOfList; i++) {
-//      ProgLang proglang = proglangs[i];
-//
-//      var listItem = new GridTile(
-//        child: new GestureDetector(
-//          onTap: () {
-//            Navigator.push(
-//              context,
-//              new MaterialPageRoute(
-//                  builder: (context) => CheatSheetPage(proglang: proglang,)),
-//            );
-//          },
-//          child: new Card(
-//            margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-//            shape: RoundedRectangleBorder(
-//                borderRadius: BorderRadius.circular(10.0)),
-//            elevation: 4.0,
-//            child: new Image(
-//              image: AssetImage(proglang.image),
-//              fit: BoxFit.contain,
-//            ),
-//          ),
-//        ),
-//      );
-//
-//      listElementWidgetList.add(listItem);
-//    }
-//  }
-//  return listElementWidgetList;
-//}
-
-// moved to ProgLang class
-//List<ProgLang> getProgLang() {
-//  return [
-//    ProgLang('Java', 'assets/java.png', '/Users/adriehui/ccs/assets/cs-java.jpg'),
-//    ProgLang('JavaScript', 'assets/js.png', 'assets/Java-Cheat-Sheet.pdf'),
-//    ProgLang('Linux', 'assets/linux.png', 'assets/java.cs.jpg'),
-//    ProgLang('Python', 'assets/python.png', 'assets/cs-python.pdf')
-//  ];
-//}

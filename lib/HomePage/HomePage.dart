@@ -49,10 +49,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        title: Text(widget.title),
-//      ),
-    backgroundColor: Colors.white70,
+    backgroundColor: Theme.of(context).backgroundColor,
         body: TabBarView(
           controller: _tabController,
           children: _tabList,
