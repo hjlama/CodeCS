@@ -1,3 +1,5 @@
+import 'package:ccs/Problem.dart';
+import 'package:ccs/Report.dart';
 import 'package:ccs/testing/SignUp_firebase_test.dart';
 import 'package:flutter/material.dart';
 import 'package:ccs/Login_Signup/Welcome.dart';
@@ -13,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'CodeCS',
-      home: Welcome(),
+      // first page
+//      home: Welcome(),
+      home: Problem(),
+      // theme pack
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.lightBlueAccent,
@@ -28,7 +33,7 @@ class MyApp extends StatelessWidget {
           body1: TextStyle(fontSize: 14.0, fontFamily: 'ProximaNova'),
           subtitle: TextStyle(fontSize: 20.0, fontFamily: 'ProximaNova'),
           button: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 14.0,
                   fontFamily: 'ProximaNova',
                   fontWeight: FontWeight.bold)
               .copyWith(color: Colors.white),
