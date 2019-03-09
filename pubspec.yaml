@@ -28,6 +28,7 @@ dependencies:
   flutter_full_pdf_viewer: ^1.0.4
   material_design_icons_flutter: ^3.2.3595
   fluwx: ^0.6.0
+  google_sign_in: ^4.0.1+1
 
 
   # The following adds the Cupertino Icons font to your application.

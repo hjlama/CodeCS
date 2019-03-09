@@ -188,10 +188,3 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-void facebook_firebase() {
-  //TODO facebook firebase login
-}
-
-void google_firebase() {
-  //TODO google firebase login
-}

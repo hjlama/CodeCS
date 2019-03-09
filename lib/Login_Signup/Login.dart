@@ -1,8 +1,9 @@
 import 'package:ccs/HomePage/HomePage.dart';
-import 'package:fluwx/fluwx.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
@@ -187,9 +190,10 @@ class _LoginState extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  //facebook widget
                   Padding(
-                    //facebook widget
-                    padding: EdgeInsets.only(top: 350.0, left: 10.0,right: 15.0),
+                    padding:
+                        EdgeInsets.only(top: 350.0, left: 10.0, right: 15.0),
                     child: GestureDetector(
                       onTap: facebook_firebase,
                       child: Container(
@@ -210,9 +214,10 @@ class _LoginState extends State<Login> {
                   // wechat login
                   Padding(
                     //google widget
-                    padding: EdgeInsets.only(top: 350.0,right: 15.0,left: 10.0),
+                    padding:
+                        EdgeInsets.only(top: 350.0, right: 15.0, left: 10.0),
                     child: GestureDetector(
-                      onTap: google_firebase,
+                      onTap: wechat_login,
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
                         decoration: new BoxDecoration(
@@ -227,10 +232,12 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
+
                   // google
                   Padding(
                     //google widget
-                    padding: EdgeInsets.only(top: 350.0,left: 10.0 ,right: 10.0),
+                    padding:
+                        EdgeInsets.only(top: 350.0, left: 10.0, right: 10.0),
                     child: GestureDetector(
                       onTap: google_firebase,
                       child: Container(
@@ -248,9 +255,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
 
+                  //Anonymous login button
                   Padding(
-                    //Anonymous login button
-                    padding: EdgeInsets.only(top: 350.0,left: 15.0 ),
+                    padding: EdgeInsets.only(top: 350.0, left: 15.0),
                     child: GestureDetector(
                       onTap: login_anon,
                       child: Container(
@@ -291,24 +298,42 @@ class _LoginState extends State<Login> {
     }
   }
 
-
   Future<FirebaseUser> login_anon() async {
-    try{
+    try {
       FirebaseUser user = await FirebaseAuth.instance.signInAnonymously();
       print('Signed in ${user.uid}');
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => HomePage(user: user)));
-    }catch(e){
+    } catch (e) {
       print(e.message);
     }
   }
+
+  Future<FirebaseUser> google_firebase() async {
+    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+    GoogleSignInAuthentication authentication =
+        await googleSignInAccount.authentication;
+
+    FirebaseUser user = await _firebaseAuth.signInWithGoogle(
+        idToken: authentication.idToken,
+        accessToken: authentication.accessToken);
+
+    print("User Name : ${user.displayName}");
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new HomePage(user: user),
+      ),
+    );
+  }
 }
 
+void wechat_login() {
+  fluwx
+      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+      .then((data) {});
+}
 
 void facebook_firebase() {
   //TODO facebook firebase login
-}
-
-void google_firebase() {
-  //TODO google firebase login
 }
