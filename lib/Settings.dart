@@ -10,7 +10,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Settings', style: new TextStyle(fontSize: 26)),
+        title: Text('Settings', style: Theme.of(context).textTheme.title,),
         centerTitle: true,
       ),
       body: new Container(

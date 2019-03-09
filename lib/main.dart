@@ -18,16 +18,24 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Colors.lightBlueAccent,
         accentColor: Colors.lightBlue,
-        fontFamily: 'Montserrat',
+        fontFamily: 'ProximaNova',
         textTheme: TextTheme(
           title: TextStyle(
-              fontFamily: 'ProximaNova',
-              fontSize: 25,
-              fontWeight: FontWeight.bold),
+                  fontFamily: 'ProximaNova',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold)
+              .copyWith(color: Colors.white),
           body1: TextStyle(fontSize: 14.0, fontFamily: 'ProximaNova'),
-          button: TextStyle(fontSize: 20.0, fontFamily: 'ProximaNova',)
+          subtitle: TextStyle(fontSize: 20.0, fontFamily: 'ProximaNova'),
+          button: TextStyle(
+                  fontSize: 25.0,
+                  fontFamily: 'ProximaNova',
+                  fontWeight: FontWeight.bold)
+              .copyWith(color: Colors.white),
         ),
         appBarTheme: AppBarTheme(color: Colors.lightBlue),
+        backgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
       ),
     );
 //        home: HomePage());

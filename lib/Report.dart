@@ -10,7 +10,10 @@ class _ReportState extends State<Report> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Report problem', style: new TextStyle(fontSize: 26)),
+        title: Text(
+          'Report problem',
+          style: Theme.of(context).textTheme.title,
+        ),
         centerTitle: true,
       ),
       body: new Container(

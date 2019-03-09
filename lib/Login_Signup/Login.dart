@@ -17,11 +17,12 @@ class _LoginState extends State<Login> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(//    scopes: [
-      //      'email',
-      //      'https://www.googleapis.com/auth/contacts.readonly',
-      //    ],
-      );
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
   GoogleSignInAccount _googleSignInAccount;
 
   @override
@@ -139,10 +140,7 @@ class _LoginState extends State<Login> {
                           vertical: 15.0, horizontal: 50.0),
                       child: Text(
                         "LOGIN",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "WorkSansBold"),
+                        style: Theme.of(context).textTheme.button,
                       ),
                     ),
                     onPressed: login),
@@ -173,10 +171,10 @@ class _LoginState extends State<Login> {
                       padding: EdgeInsets.only(left: 15.0, right: 15.0),
                       child: Text(
                         "Or login with ",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                            fontFamily: "WorkSansMedium"),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle
+                            .copyWith(color: Colors.white),
                       ),
                     ),
                     // right bar
@@ -277,25 +275,39 @@ class _LoginState extends State<Login> {
   }
 
   // Method : login with Google
-  Future<Null> googleFirebase() async {
-    GoogleSignInAccount user = _googleSignIn.currentUser;
+  Future<void> googleFirebase() async {
+    try {
+      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
 
-    if (user == null) {
-      await _googleSignIn.signIn().then((account) {
-        user = account;
-      }, onError: (error) {
-        _errorSnackBar('Cannot login with your Google account');
-      });
+      FirebaseUser user = await _firebaseAuth.signInWithCredential(credential);
+      assert(user.email != null);
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+
+      final FirebaseUser currentUser = await _firebaseAuth.currentUser();
+      assert(user.uid == currentUser.uid);
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => HomePage(user: user)));
+    } catch (e) {
+      errorSnackBar(e.message);
     }
   }
 
-  void _errorSnackBar(String errormsg) {
+  void errorSnackBar(String errormsg) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(content: Text(errormsg)),
     );
   }
 }
 
+// Method: to create social login button in Welcome page
 _buttonDecor(IconData icon) {
   return new Container(
     padding: const EdgeInsets.all(15.0),
@@ -303,11 +315,16 @@ _buttonDecor(IconData icon) {
       shape: BoxShape.circle,
       color: Colors.white,
     ),
-    child: new Icon(icon, color: Colors.blue[800]),
+    child: new Icon(
+      icon,
+      color: Colors.blue[800],
+      size: 30.0,
+    ),
   );
 }
 
 void wechat_login() {
+  //TODO implementing wechat login
   fluwx
       .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
       .then((data) {});

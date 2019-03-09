@@ -45,7 +45,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
               children: <Widget>[
                 Padding(
                   //logo in the middle
-                  padding: EdgeInsets.only(top: 75.0),
+                  padding: EdgeInsets.only(top: 70.0),
                   child: new Image(
                     width: 250.0,
                     height: 191.0,
@@ -126,7 +126,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 onPressed: _loginTapped,
                 child: Text(
                   "Login",
-                  style: Theme.of(context).textTheme.button,
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
             ),
@@ -137,7 +137,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 onPressed: _signupTapped,
                 child: Text(
                   "Signup",
-                  style: Theme.of(context).textTheme.button,
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
             ),

@@ -100,10 +100,10 @@ class _SignUpState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                         child: TextFormField(
-                          validator: (input){
-                            if(input != _password){
+                          validator: (input) {
+                            if (input != _password) {
                               return 'Password not match';
-                            }else{
+                            } else {
                               _password = input;
                             }
                           },
@@ -157,10 +157,7 @@ class _SignUpState extends State<SignUp> {
                           vertical: 15.0, horizontal: 40.0),
                       child: Text(
                         "SIGN UP",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "WorkSansBold"),
+                        style: Theme.of(context).textTheme.button,
                       ),
                     ),
                     onPressed: signup),
@@ -177,7 +174,7 @@ class _SignUpState extends State<SignUp> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
-        FirebaseUser user = await FirebaseAuth.instance
+        await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Welcome()));
@@ -187,4 +184,3 @@ class _SignUpState extends State<SignUp> {
     }
   }
 }
-

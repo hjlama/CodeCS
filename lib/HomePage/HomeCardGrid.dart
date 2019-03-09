@@ -29,7 +29,7 @@ class _HomeCardGridState extends State<HomeCardGrid> {
       appBar: AppBar(
         title: Text(
           'Home',
-          style: TextStyle(fontSize: 25),
+          style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -59,31 +59,31 @@ class _HomeCardGridState extends State<HomeCardGrid> {
       ),
 
       // app getting programming language from firebase
-//      body: StreamBuilder(
-//          stream: Firestore.instance.collection('proglang').snapshots(),
-//          builder: (context, snapshot) {
-//            if (!snapshot.hasData)
-//              return new Container(
-//                child: new Center(
-//                  child: new CircularProgressIndicator(),
-//                ),
-//              );
-//            List proglanglist = snapshot.data;
-//            return new CustomScrollView(
-//              primary: false,
-//              slivers: <Widget>[
-//                new SliverPadding(
-//                  padding: const EdgeInsets.all(10.0),
-//                  sliver: new SliverGrid.count(
-//                    crossAxisCount: 2,
-//                    mainAxisSpacing: 10.0,
-//                    crossAxisSpacing: 10.0,
-//                    children: createProgLangCardItem(proglanglist, context),
-//                  ),
-//                ),
-//              ],
-//            );
-//          }),
+      //      body: StreamBuilder(
+      //          stream: Firestore.instance.collection('proglang').snapshots(),
+      //          builder: (context, snapshot) {
+      //            if (!snapshot.hasData)
+      //              return new Container(
+      //                child: new Center(
+      //                  child: new CircularProgressIndicator(),
+      //                ),
+      //              );
+      //            List proglanglist = snapshot.data;
+      //            return new CustomScrollView(
+      //              primary: false,
+      //              slivers: <Widget>[
+      //                new SliverPadding(
+      //                  padding: const EdgeInsets.all(10.0),
+      //                  sliver: new SliverGrid.count(
+      //                    crossAxisCount: 2,
+      //                    mainAxisSpacing: 10.0,
+      //                    crossAxisSpacing: 10.0,
+      //                    children: createProgLangCardItem(proglanglist, context),
+      //                  ),
+      //                ),
+      //              ],
+      //            );
+      //          }),
     );
   }
 }
