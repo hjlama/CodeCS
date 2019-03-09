@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ccs/Login_Signup/Welcome.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -13,14 +14,20 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn(//    scopes: [
+      //      'email',
+      //      'https://www.googleapis.com/auth/contacts.readonly',
+      //    ],
+      );
+  GoogleSignInAccount _googleSignInAccount;
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
-//      EdgeInsets.only(top: 20.0),
+      key: _formKey, //      EdgeInsets.only(top: 20.0),
       child: new Column(
         children: <Widget>[
           // invisible widget to create gap in between
@@ -158,7 +165,8 @@ class _LoginState extends State<Login> {
                             tileMode: TileMode.clamp),
                       ),
                       // size of the bar
-                      width: 100.0, height: 1.0,
+                      width: 100.0,
+                      height: 1.0,
                     ),
                     // text
                     Padding(
@@ -195,20 +203,8 @@ class _LoginState extends State<Login> {
                     padding:
                         EdgeInsets.only(top: 350.0, left: 10.0, right: 15.0),
                     child: GestureDetector(
-                      onTap: facebook_firebase,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.facebook,
-                          color: Colors.blue[800],
-                          size: 40,
-                        ),
-                      ),
-                    ),
+                        onTap: facebook_firebase,
+                        child: _buttonDecor(MdiIcons.facebook)),
                   ),
 
                   // wechat login
@@ -218,20 +214,10 @@ class _LoginState extends State<Login> {
                         EdgeInsets.only(top: 350.0, right: 15.0, left: 10.0),
                     child: GestureDetector(
                       onTap: wechat_login,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.wechat,
-                          color: Colors.blue[800],
-                          size: 40,
-                        ),
-                      ),
+                      child: _buttonDecor(MdiIcons.wechat),
                     ),
                   ),
+//
 
                   // google
                   Padding(
@@ -239,39 +225,19 @@ class _LoginState extends State<Login> {
                     padding:
                         EdgeInsets.only(top: 350.0, left: 10.0, right: 10.0),
                     child: GestureDetector(
-                      onTap: google_firebase,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.google,
-                          color: Colors.blue[800],
-                          size: 40,
-                        ),
-                      ),
+                      onTap: googleFirebase,
+                      child: _buttonDecor(MdiIcons.google),
                     ),
                   ),
+//                    ),
+//                  ),
 
                   //Anonymous login button
                   Padding(
                     padding: EdgeInsets.only(top: 350.0, left: 15.0),
                     child: GestureDetector(
-                      onTap: login_anon,
-                      child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: new Icon(
-                          MdiIcons.accountTie,
-                          color: Colors.blue[800],
-                          size: 40,
-                        ),
-                      ),
+                      onTap: loginAnon,
+                      child: _buttonDecor(MdiIcons.accountTie),
                     ),
                   ),
                 ],
@@ -283,7 +249,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-// when tapping the login button
+// Method : Login in with Firebase w/ (email, password)
   void login() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
@@ -298,7 +264,8 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Future<FirebaseUser> login_anon() async {
+  // Method : login anonymously
+  Future<void> loginAnon() async {
     try {
       FirebaseUser user = await FirebaseAuth.instance.signInAnonymously();
       print('Signed in ${user.uid}');
@@ -309,23 +276,35 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Future<FirebaseUser> google_firebase() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication authentication =
-        await googleSignInAccount.authentication;
+  // Method : login with Google
+  Future<Null> googleFirebase() async {
+    GoogleSignInAccount user = _googleSignIn.currentUser;
 
-    FirebaseUser user = await _firebaseAuth.signInWithGoogle(
-        idToken: authentication.idToken,
-        accessToken: authentication.accessToken);
+    if (user == null) {
+      await _googleSignIn.signIn().then((account) {
+        user = account;
+      }, onError: (error) {
+        _errorSnackBar('Cannot login with your Google account');
+      });
+    }
+  }
 
-    print("User Name : ${user.displayName}");
-    Navigator.push(
-      context,
-      new MaterialPageRoute(
-        builder: (context) => new HomePage(user: user),
-      ),
+  void _errorSnackBar(String errormsg) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(content: Text(errormsg)),
     );
   }
+}
+
+_buttonDecor(IconData icon) {
+  return new Container(
+    padding: const EdgeInsets.all(15.0),
+    decoration: new BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.white,
+    ),
+    child: new Icon(icon, color: Colors.blue[800]),
+  );
 }
 
 void wechat_login() {

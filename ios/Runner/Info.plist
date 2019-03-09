@@ -41,6 +41,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- Google Sign-in Section -->
+    <key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<!-- TODO Replace this value: -->
+    			<!-- Copied from GoogleServices-Info.plist key REVERSED_CLIENT_ID -->
+    			<string>com.googleusercontent.apps.1057878578827-uvslu8jt99s860pcrkgdvdll5ap6875d</string>
+    		</array>
+    	</dict>
+    </array>
+    <!-- End of the Google Sign-in Section -->
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
     <key>LSApplicationQueriesSchemes</key>
