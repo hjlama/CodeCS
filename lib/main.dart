@@ -20,11 +20,13 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightBlue,
         fontFamily: 'Montserrat',
         textTheme: TextTheme(
-            title: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
-            body1: TextStyle(fontSize: 14.0, fontFamily: 'Monserrat')),
+          title: TextStyle(
+              fontFamily: 'ProximaNova',
+              fontSize: 25,
+              fontWeight: FontWeight.bold),
+          body1: TextStyle(fontSize: 14.0, fontFamily: 'ProximaNova'),
+          button: TextStyle(fontSize: 20.0, fontFamily: 'ProximaNova',)
+        ),
         appBarTheme: AppBarTheme(color: Colors.lightBlue),
       ),
     );

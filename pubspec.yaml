@@ -126,5 +126,10 @@ flutter:
       style: italic
 #    - asset: font/Montserrat-Bold.ttf
 #    - asset: font/Montserrat-Black.ttf
+
+  - family: ProximaNova
+    fonts:
+    - asset: fonts/Proxima-Nova-Regular.ttf
+    - asset: fonts/Proxima-Nova-Bold.ttf
 # For details regarding fonts from package dependencies,
 # see https://flutter.io/custom-fonts/#from-packages

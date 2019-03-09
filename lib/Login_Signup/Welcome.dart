@@ -126,10 +126,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 onPressed: _loginTapped,
                 child: Text(
                   "Login",
-                  style: TextStyle(
-                      color: left,
-                      fontSize: 16.0,
-                      fontFamily: "WorkSansSemiBold"),
+                  style: Theme.of(context).textTheme.button,
                 ),
               ),
             ),
@@ -140,10 +137,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 onPressed: _signupTapped,
                 child: Text(
                   "Signup",
-                  style: TextStyle(
-                      color: right,
-                      fontSize: 16.0,
-                      fontFamily: "WorkSansSemiBold"),
+                  style: Theme.of(context).textTheme.button,
                 ),
               ),
             ),
