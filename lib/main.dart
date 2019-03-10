@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'CodeCS',
       // first page
-//      home: Welcome(),
-      home: Problem(),
+      home: Welcome(),
+//      home: HomePage(),
       // theme pack
       theme: ThemeData(
         brightness: Brightness.light,
