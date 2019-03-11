@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:ccs/HomePage/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,14 +15,14 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FacebookLogin _facebookLogin = FacebookLogin();
+  final FacebookLogin _facebookSignIn = new FacebookLogin();
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
       'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
-  bool isLoggedIn = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +142,7 @@ class _LoginState extends State<Login> {
                         style: Theme.of(context).textTheme.button,
                       ),
                     ),
-                    onPressed: loginWithFirebase),
+                    onPressed: login),
               ),
               Padding(
                 // gap in between button n text
@@ -203,7 +200,7 @@ class _LoginState extends State<Login> {
                     padding:
                         EdgeInsets.only(top: 350.0, left: 10.0, right: 15.0),
                     child: GestureDetector(
-                        onTap: loginWithFB,
+                        onTap: facebookFirebaseLogin,
                         child: _buttonDecor(MdiIcons.facebook)),
                   ),
 
@@ -225,7 +222,7 @@ class _LoginState extends State<Login> {
                     padding:
                         EdgeInsets.only(top: 350.0, left: 10.0, right: 10.0),
                     child: GestureDetector(
-                      onTap: loginWithGoogle,
+                      onTap: googleFirebaseLogin,
                       child: _buttonDecor(MdiIcons.google),
                     ),
                   ),
@@ -236,7 +233,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: EdgeInsets.only(top: 350.0, left: 15.0),
                     child: GestureDetector(
-                      onTap: loginAnon,
+                      onTap: anonLogin,
                       child: _buttonDecor(MdiIcons.accountTie),
                     ),
                   ),
@@ -250,7 +247,7 @@ class _LoginState extends State<Login> {
   }
 
 // Method : Login in with Firebase w/ (email, password)
-  void loginWithFirebase() async {
+  void login() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
@@ -265,7 +262,7 @@ class _LoginState extends State<Login> {
   }
 
   // Method : login anonymously
-  Future<void> loginAnon() async {
+  Future<void> anonLogin() async {
     try {
       FirebaseUser user = await FirebaseAuth.instance.signInAnonymously();
       print('Signed in ${user.uid}');
@@ -277,82 +274,55 @@ class _LoginState extends State<Login> {
   }
 
   // Method : login with Google
-  Future<void> loginWithGoogle() async {
-//    try {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
+  Future<void> googleFirebaseLogin() async {
+    try {
+      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
 
-    FirebaseUser user =
-        await _firebaseAuth.signInWithCredential(credential).catchError((e) {
+      FirebaseUser user = await _firebaseAuth.signInWithCredential(credential);
+      assert(user.email != null);
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+
+      final FirebaseUser currentUser = await _firebaseAuth.currentUser();
+      assert(user.uid == currentUser.uid);
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => HomePage(user: user)));
+    } catch (e) {
       errorSnackBar(e);
-    });
-    assert(user.email != null);
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-
-    final FirebaseUser currentUser = await _firebaseAuth.currentUser();
-    assert(user.uid == currentUser.uid);
-
-    Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage(user: user)))
-        .catchError((e) {
-      errorSnackBar(e);
-    });
-//    } catch (e) {
-//      errorSnackBar(e.message);
-//    }
+    }
   }
 
-  void onLoginStatusChanged(bool isLoggedIn) {
-    setState(() {
-      this.isLoggedIn = isLoggedIn;
-    });
-  }
+  Future<void> facebookFirebaseLogin() async {
+    try {
+      final FacebookLoginResult fbLoginResult =
+          await _facebookSignIn.logInWithReadPermissions(['email']);
 
-  Future<FirebaseUser> loginWithFB() async {
-    final FacebookLogin facebookLogin = new FacebookLogin();
-    var facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email']);
-
-    debugPrint(facebookLoginResult.status.toString());
-    switch (facebookLoginResult.status) {
-      case FacebookLoginStatus.loggedIn:
-        var accessToken = facebookLoginResult.accessToken;
-        debugPrint('Facebook Login Succssful');
-//        var graphResponse = await http.get (
-//            "https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${accessToken
-//                .token}");
-//        var profile = json.decode (graphResponse.body);
-
-        try {
-          final AuthCredential credential = FacebookAuthProvider.getCredential(
-              accessToken: facebookLoginResult.accessToken.token);
+      switch (fbLoginResult.status) {
+        case FacebookLoginStatus.loggedIn:
+          FacebookAccessToken myToken = fbLoginResult.accessToken;
+          AuthCredential credential =
+              FacebookAuthProvider.getCredential(accessToken: myToken.token);
           FirebaseUser user =
-              await _firebaseAuth.signInWithCredential(credential);
+              await FirebaseAuth.instance.signInWithCredential(credential);
+//          debugPrint(fb.)
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomePage(user: user)));
-          onLoginStatusChanged(true);
-        } catch (e) {
-          errorSnackBar(e);
-        }
 
-        break;
-
-      case FacebookLoginStatus.error:
-        print("Error");
-//        errorSnackBar('Error');
-        onLoginStatusChanged(false);
-        break;
-      case FacebookLoginStatus.cancelledByUser:
-        print("CancelledByUser");
-//        errorSnackBar('CancelledByUser');
-        onLoginStatusChanged(false);
-        break;
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          break;
+        case FacebookLoginStatus.error:
+          break;
+      }
+    } catch (e) {
+      errorSnackBar(e);
     }
   }
 
@@ -362,8 +332,10 @@ class _LoginState extends State<Login> {
     );
   }
 
+//}
+
 // Method: to create social login button in Welcome page
-  _buttonDecor(IconData icon) async {
+  _buttonDecor(IconData icon) {
     return new Container(
       padding: const EdgeInsets.all(15.0),
       decoration: new BoxDecoration(
@@ -377,11 +349,11 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
 
-  void wechat_login() {
-    //TODO implementing wechat login
+void wechat_login() {
+  //TODO implementing wechat login
 //  fluwx
 //      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
 //      .then((data) {});
-  }
 }
