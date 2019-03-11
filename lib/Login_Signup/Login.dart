@@ -11,10 +11,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+//  bool _success;
+//  String _userID;
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FacebookLogin _facebookSignIn = new FacebookLogin();
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -22,7 +24,6 @@ class _LoginState extends State<Login> {
       'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
-
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +211,7 @@ class _LoginState extends State<Login> {
                     padding:
                         EdgeInsets.only(top: 350.0, right: 15.0, left: 10.0),
                     child: GestureDetector(
-                      onTap: wechat_login,
+                      onTap: wechatLogin,
                       child: _buttonDecor(MdiIcons.wechat),
                     ),
                   ),
@@ -219,6 +220,7 @@ class _LoginState extends State<Login> {
                   // google
                   Padding(
                     //google widget
+
                     padding:
                         EdgeInsets.only(top: 350.0, left: 10.0, right: 10.0),
                     child: GestureDetector(
@@ -275,28 +277,52 @@ class _LoginState extends State<Login> {
 
   // Method : login with Google
   Future<void> googleFirebaseLogin() async {
-    try {
-      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
+//    try {
+//      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+//      GoogleSignInAuthentication googleSignInAuthentication =
+//          await googleSignInAccount.authentication;
+//      final AuthCredential credential = GoogleAuthProvider.getCredential(
+//        accessToken: googleSignInAuthentication.accessToken,
+//        idToken: googleSignInAuthentication.idToken,
+//      );
+//
+//      FirebaseUser user = await _firebaseAuth.signInWithCredential(credential);
+//      assert(user.email != null);
+//      assert(!user.isAnonymous);
+//      assert(await user.getIdToken() != null);
+//
+//      final FirebaseUser currentUser = await _firebaseAuth.currentUser();
+//      assert(user.uid == currentUser.uid);
+//
+//      Navigator.push(context,
+//          MaterialPageRoute(builder: (context) => HomePage(user: user)));
+//    } catch (e) {
+//      errorSnackBar(e);
+//    }
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+    await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
       );
+    final FirebaseUser user = await _auth.signInWithCredential(credential);
+    assert(user.email != null);
+    assert(user.displayName != null);
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
 
-      FirebaseUser user = await _firebaseAuth.signInWithCredential(credential);
-      assert(user.email != null);
-      assert(!user.isAnonymous);
-      assert(await user.getIdToken() != null);
-
-      final FirebaseUser currentUser = await _firebaseAuth.currentUser();
-      assert(user.uid == currentUser.uid);
-
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => HomePage(user: user)));
-    } catch (e) {
-      errorSnackBar(e);
-    }
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert(user.uid == currentUser.uid);
+    setState(() {
+      if (user != null) {
+        Navigator.push(context,
+                           MaterialPageRoute(builder: (context) => HomePage(user: user)));
+      } else {
+        debugPrint('Google sign in failed.');
+      }
+    });
+//  }
   }
 
   Future<void> facebookFirebaseLogin() async {
@@ -351,7 +377,7 @@ class _LoginState extends State<Login> {
   }
 }
 
-void wechat_login() {
+void wechatLogin() {
   //TODO implementing wechat login
 //  fluwx
 //      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
