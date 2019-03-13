@@ -331,7 +331,7 @@ class _LoginState extends State<Login> {
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
-        final FacebookAccessToken accessToken = result.accessToken;
+//        final FacebookAccessToken accessToken = result.accessToken;
 //        _showMessage('''
 //         Logged in!
 //

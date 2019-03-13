@@ -22,13 +22,13 @@ class _HomePageState extends State<HomePage>
 
   List<Widget> _tabList = [
     new Container(
-      child: HomeCardGrid(),
+      child: new HomeCardGrid(),
     ),
     new Container(
-      child: Report(),
+      child: new Report(),
     ),
     new Container(
-      child: Settings(),
+      child: new Settings(),
     ),
   ];
 
