@@ -1,6 +1,7 @@
 import 'package:ccs/Problem.dart';
-import 'package:ccs/Report.dart';
+import 'package:ccs/ReportPage/Report.dart';
 import 'package:ccs/testing/SignUp_firebase_test.dart';
+import 'package:ccs/testing/form_firebase_testing.dart';
 import 'package:flutter/material.dart';
 import 'package:ccs/Login_Signup/Welcome.dart';
 import 'package:ccs/testing/Login_firebase_test.dart';
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'CodeCS',
       // first page
-      home: Welcome(),
-//      home: HomePage(),
+//      home: Welcome(),
+      home: Report(),
+//      home: ReportTest(),
       // theme pack
       theme: ThemeData(
         brightness: Brightness.light,

@@ -1,5 +1,5 @@
 import 'package:ccs/HomePage/HomeCardGrid.dart';
-import 'package:ccs/Report.dart';
+import 'package:ccs/ReportPage/Report.dart';
 import 'package:flutter/material.dart';
 import 'package:ccs/bottom_navy_bar_rewrite.dart';
 import 'package:ccs/Settings.dart';

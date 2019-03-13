@@ -332,33 +332,33 @@ class _LoginState extends State<Login> {
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
-        _showMessage('''
-         Logged in!
-         
-         Token: ${accessToken.token}
-         User id: ${accessToken.userId}
-         Expires: ${accessToken.expires}
-         Permissions: ${accessToken.permissions}
-         Declined permissions: ${accessToken.declinedPermissions}
-         ''');
+//        _showMessage('''
+//         Logged in!
+//
+//         Token: ${accessToken.token}
+//         User id: ${accessToken.userId}
+//         Expires: ${accessToken.expires}
+//         Permissions: ${accessToken.permissions}
+//         Declined permissions: ${accessToken.declinedPermissions}
+//         ''');
         break;
       case FacebookLoginStatus.cancelledByUser:
-        _showMessage('Login cancelled by the user.');
+//        _showMessage('Login cancelled by the user.');
         break;
       case FacebookLoginStatus.error:
-        _showMessage('Something went wrong with the login process.\n'
-            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+//        _showMessage('Something went wrong with the login process.\n'
+//            'Here\'s the error Facebook gave us: ${result.errorMessage}');
         break;
     }
   }
 
-  void _showMessage(String message) {
-    setState(() {
-      _message = message;
-    });
-  }
-
-  String _message = 'Log in/out by pressing the buttons below.';
+//  void _showMessage(String message) {
+//    setState(() {
+//      _message = message;
+//    });
+//  }
+//
+//  String _message = 'Log in/out by pressing the buttons below.';
 
   void errorSnackBar(String errormsg) {
     _scaffoldKey.currentState.showSnackBar(
