@@ -5,8 +5,6 @@ import 'package:ccs/bottom_navy_bar_rewrite.dart';
 import 'package:ccs/Settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
 class HomePage extends StatefulWidget {
 //  HomePage({Key key, this.title}) : super(key: key);
   HomePage({Key key, this.user}) : super(key: key);
@@ -49,7 +47,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: TabBarView(
           controller: _tabController,
           children: _tabList,
@@ -57,7 +55,7 @@ class _HomePageState extends State<HomePage>
 
         //bottom_navy_bar
         bottomNavigationBar: BottomNavyBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor,
           onItemSelected: (index) => setState(() {
                 _currentIndex = index;
                 _tabController.animateTo(_currentIndex);
@@ -66,17 +64,21 @@ class _HomePageState extends State<HomePage>
             BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('Home'),
-              activeColor: Colors.blueAccent,
+              inactiveColor: Colors.lightBlue,
+              activeColor: Colors.blue[900],
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.error),
-                title: Text('Report'),
-                activeColor: Colors.blueAccent),
+              icon: Icon(Icons.error),
+              title: Text('Report'),
+              inactiveColor: Colors.lightBlue,
+              activeColor: Colors.blue[900],
+            ),
             BottomNavyBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Settings'),
-                activeColor: Colors.blueAccent),
-
+              icon: Icon(Icons.settings),
+              title: Text('Settings'),
+              inactiveColor: Colors.lightBlue,
+              activeColor: Colors.blue[900],
+            ),
           ],
         ));
   }

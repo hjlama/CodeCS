@@ -23,7 +23,10 @@ class _HomeCardGridState extends State<HomeCardGrid> {
       appBar: AppBar(
         title: Text(
           'Home',
-          style: Theme.of(context).textTheme.title,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -45,7 +48,7 @@ class _HomeCardGridState extends State<HomeCardGrid> {
         primary: false,
         slivers: <Widget>[
           new SliverPadding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(0.0),
             sliver: new SliverGrid.count(
               crossAxisCount: 2,
               mainAxisSpacing: 10.0,
@@ -60,7 +63,6 @@ class _HomeCardGridState extends State<HomeCardGrid> {
 
   void signout() async {
 //    FirebaseUser user = await _
-
   }
 }
 
