@@ -27,7 +27,7 @@ dependencies:
   firebase_auth: ^0.8.1+4
   flutter_full_pdf_viewer: ^1.0.4
   material_design_icons_flutter: ^3.2.3595
-  fluwx: ^0.6.0
+#  fluwx: ^0.6.0
   google_sign_in: ^4.0.1+1
   flutter_facebook_login: ^2.0.0
   cloud_firestore: ^0.9.5+2

@@ -301,11 +301,11 @@ class _LoginState extends State<Login> {
 //    }
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
-      );
+    );
     final FirebaseUser user = await _auth.signInWithCredential(credential);
     assert(user.email != null);
     assert(user.displayName != null);
@@ -317,7 +317,7 @@ class _LoginState extends State<Login> {
     setState(() {
       if (user != null) {
         Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => HomePage(user: user)));
+            MaterialPageRoute(builder: (context) => HomePage(user: user)));
       } else {
         debugPrint('Google sign in failed.');
       }
@@ -325,32 +325,40 @@ class _LoginState extends State<Login> {
 //  }
   }
 
-  Future<void> facebookFirebaseLogin() async {
-    try {
-      final FacebookLoginResult fbLoginResult =
-          await _facebookSignIn.logInWithReadPermissions(['email']);
+  Future<Null> facebookFirebaseLogin() async {
+    final FacebookLoginResult result =
+        await _facebookSignIn.logInWithReadPermissions(['email']);
 
-      switch (fbLoginResult.status) {
-        case FacebookLoginStatus.loggedIn:
-          FacebookAccessToken myToken = fbLoginResult.accessToken;
-          AuthCredential credential =
-              FacebookAuthProvider.getCredential(accessToken: myToken.token);
-          FirebaseUser user =
-              await FirebaseAuth.instance.signInWithCredential(credential);
-//          debugPrint(fb.)
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HomePage(user: user)));
-
-          break;
-        case FacebookLoginStatus.cancelledByUser:
-          break;
-        case FacebookLoginStatus.error:
-          break;
-      }
-    } catch (e) {
-      errorSnackBar(e);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        _showMessage('''
+         Logged in!
+         
+         Token: ${accessToken.token}
+         User id: ${accessToken.userId}
+         Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        _showMessage('Login cancelled by the user.');
+        break;
+      case FacebookLoginStatus.error:
+        _showMessage('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        break;
     }
   }
+
+  void _showMessage(String message) {
+    setState(() {
+      _message = message;
+    });
+  }
+
+  String _message = 'Log in/out by pressing the buttons below.';
 
   void errorSnackBar(String errormsg) {
     _scaffoldKey.currentState.showSnackBar(
