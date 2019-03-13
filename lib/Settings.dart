@@ -63,7 +63,8 @@ class _SettingsState extends State<Settings> {
                     showAboutDialog(
                         context: context,
                         applicationName: 'CodeCS',
-                        applicationVersion: 'ver 1.0');
+                        applicationVersion: 'ver 1.0',
+                        applicationIcon: Image.asset('assets/appicon.png',width: 65.0,height: 65.0));
                   },
                   child: new Text('About this app'),
                 ),

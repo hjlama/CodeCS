@@ -36,7 +36,7 @@ class ReportStepper extends StatefulWidget {
 
 class _ReportStepperState extends State<ReportStepper> {
   int _currentStep = 0;
-  static var _focusNode = new FocusNode();
+//  static var _focusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   static ReportForm _reportForm = new ReportForm('', '');
   final reportFormRef =
@@ -104,17 +104,17 @@ class _ReportStepperState extends State<ReportStepper> {
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
-      setState(() {});
-      print('Has focus: $_focusNode.hasFocus');
-    });
+//    _focusNode.addListener(() {
+//      setState(() {});
+//      print('Has focus: $_focusNode.hasFocus');
+//    });
   }
 
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
+//  @override
+//  void dispose() {
+//    _focusNode.dispose();
+//    super.dispose();
+//  }
 
   @override
   Widget build(BuildContext context) {
