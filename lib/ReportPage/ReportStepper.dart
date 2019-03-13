@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ReportForm {
   String page = '';
@@ -46,39 +47,42 @@ class _ReportStepperState extends State<ReportStepper> {
                   new TextStyle(decorationStyle: TextDecorationStyle.solid)),
         )),
     new Step(
-        title: const Text('Problem'),
-        //subtitle: const Text('Subtitle'),
-        isActive: true,
-        //state: StepState.editing,
-        state: StepState.indexed,
-        content: new TextFormField(
-          keyboardType: TextInputType.phone,
-          autocorrect: false,
-          validator: (value) {
-            if (value.isEmpty || value.length < 10) {
-              return 'Please enter valid number';
-            }
-          },
-          onSaved: (String value) {
-            _reportForm.problem = value;
-          },
-          initialValue: 'testing the problem form .....',
-          decoration: new InputDecoration(
-              labelText: 'Enter the problem',
-              hintText: 'please enter',
-              icon: const Icon(Icons.feedback),
-              labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-        )),
+      title: const Text('Problem'),
+      //subtitle: const Text('Subtitle'),
+      isActive: true,
+      //state: StepState.editing,
+      state: StepState.indexed,
+      content: new TextFormField(
+        keyboardType: TextInputType.phone,
+        autocorrect: false,
+        validator: (value) {
+          if (value.isEmpty || value.length < 10) {
+            return 'Please enter valid number';
+          }
+        },
+        onSaved: (String value) {
+          _reportForm.problem = value;
+        },
+        initialValue: 'testing the problem form .....',
+        decoration: new InputDecoration(
+            labelText: 'Enter the problem',
+            hintText: 'please enter',
+            icon: const Icon(Icons.feedback),
+            labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+      ),
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
-      setState(() {});
-      print('Has focus: $_focusNode.hasFocus');
-    });
+    _focusNode.addListener(
+      () {
+        setState(() {});
+        print('Has focus: $_focusNode.hasFocus');
+      },
+    );
   }
 
   @override
@@ -106,28 +110,29 @@ class _ReportStepperState extends State<ReportStepper> {
         print("Phone: ${_reportForm.problem}");
 
         showDialog(
-            context: context,
-            child: new AlertDialog(
-              title: new Text("Details"),
-              //content: new Text("Hello World"),
-              content: new SingleChildScrollView(
-                child: new ListBody(
-                  children: <Widget>[
-                    new Text("Page : " + _reportForm.page),
-                    new Text("Problem : " + _reportForm.problem),
-                  ],
-                ),
+          context: context,
+          child: new AlertDialog(
+            title: new Text("Details"),
+            //content: new Text("Hello World"),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  new Text("Page : " + _reportForm.page),
+                  new Text("Problem : " + _reportForm.problem),
+                ],
               ),
-              actions: <Widget>[
-                new FlatButton(
-                  child: new Text('OK'),
-                  onPressed: () {
-                    showSnackBarMessage('form submitted successfully');
-//                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('OK'),
+                onPressed: () {
+
+                  showSnackBarMessage('form submitted successfully');Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
       }
     }
 

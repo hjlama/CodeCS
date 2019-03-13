@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
       title: 'CodeCS',
       // first page
 //      home: Welcome(),
-      home: Report(),
-//      home: ReportTest(),
+//      home: Report(),
+//      home: Login_firebase_test(),
+    home: HomePage(),
       // theme pack
       theme: ThemeData(
         brightness: Brightness.light,

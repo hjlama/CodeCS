@@ -1,0 +1,9 @@
+  # Pods for Runner
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'FBSDKCoreKit'
+pod 'GoogleSignIn'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Firebase/Firestore'
+pod 'Firebase/Functions'
