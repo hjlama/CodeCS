@@ -1,4 +1,4 @@
-# ccs
+# CodeCS
 
 A new Flutter application.
 
