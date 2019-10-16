@@ -1,16 +1,7 @@
 # CodeCS
 
-A new Flutter application.
+  “CodeCS” is an app that contains sheets of various programming language. Programmers no longer need to switch between different applications to search the usage of specific libraries. They can use CodeCS alongside for reference while they are programming. It contains cheat sheets of various programming languages which would show the usage of their libraries and methods. Cheat sheets that are available would be Java, JavaScript, HTML, CSS, MySQL, Linux, and Python.
 
-## Getting Started
+## Background
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+  
